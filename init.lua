@@ -1,0 +1,5 @@
+require("configs.all_the_icons")
+require("configs.basic_keymaps")
+require("configs.basic_options")
+-- require("configs.basic_auto_commands")
+require("configs.lazy_plugin_manager_configuration")
