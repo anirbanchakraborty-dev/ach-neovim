@@ -3,7 +3,6 @@ local icons = require("configs.all_the_icons")
 
 return {
     "akinsho/toggleterm.nvim",
-    version = "*", -- Recommended for this plugin
 
     -- We use a function for keys to load the icons
     keys = function()

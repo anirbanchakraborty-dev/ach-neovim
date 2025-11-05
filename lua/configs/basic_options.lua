@@ -1,4 +1,8 @@
-local opt = vim.opt
+-- Tell Neovim where Homebrew installs things
+vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
+
+local
+opt = vim.opt
 local icons = require("configs.all_the_icons")
 
 opt.number = true
