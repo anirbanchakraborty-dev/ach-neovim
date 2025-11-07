@@ -1,14 +1,7 @@
 -- lua/utilities/keymap-export.lua
 local M = {}
 
-local USE_ICONS = false
-
-local mode_names = USE_ICONS and {
-	n = "󰘧 Normal",
-	v = "󰆤 Visual",
-	i = " Insert",
-	t = "󰞷 Terminal",
-} or {
+local mode_names = {
 	n = "Normal",
 	v = "Visual",
 	i = "Insert",
@@ -70,6 +63,12 @@ end
 -- Export Function
 ---------------------------------------------------------------------
 
+-- Remove icons / emoji (non-ASCII)
+local function strip_icons(str)
+	-- keep ASCII 32–126
+	return str:gsub("[^\32-\126]", "")
+end
+
 function M.export_markdown()
 	local leader = vim.g.mapleader or " "
 	local grouped = {}
@@ -80,7 +79,7 @@ function M.export_markdown()
 				-- only leader-based mappings
 				if map.lhs:find("^" .. leader) then
 					local key = normalize_key(map.lhs)
-					local desc = map.desc
+					local desc = strip_icons(map.desc)
 
 					local prefix = key:match("^leader%s*(%w)")
 					local category = categories[prefix] or "Misc"
