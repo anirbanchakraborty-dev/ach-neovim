@@ -58,6 +58,7 @@ See the complete auto-generated mapping list:
 ### Pre-requisites (install before starting Neovim)
 
 - **[`neovim`](https://formulae.brew.sh/formula/neovim)** — `brew install neovim`
+- **[`nerdfont`](https://github.com/ryanoasis/nerd-fonts)** — `curl -fsSL https://raw.githubusercontent.com/anirbanchakraborty-dev/homebrew-font-installation/main/homebrew_fonts_installation.sh | sh`
 - **[`tree-sitter-cli`](https://formulae.brew.sh/formula/tree-sitter-cli)** — `brew install tree-sitter-cli`
 - **[`curl`](https://formulae.brew.sh/formula/curl)** — `brew install curl`
 - **[`fzf`](https://formulae.brew.sh/formula/fzf)** — `brew install fzf`

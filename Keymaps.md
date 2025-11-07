@@ -52,8 +52,8 @@
 | `leader fo` | Normal |  [o]ld files |
 | `leader fp` | Normal |  [p]review |
 | `leader fr` | Normal |  [r]eload current file |
-| `leader fs` | Visual | 󰆓 [s]ave |
 | `leader fs` | Normal | 󰆓 [s]ave |
+| `leader fs` | Visual | 󰆓 [s]ave |
 | `leader fx` | Normal |  [x]close |
 
 ## Git
