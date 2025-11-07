@@ -23,10 +23,10 @@ return {
             desc = icons.files.pdf .. " [p]review"
         },
         {
-            "<leader>fc",
+            "<leader>fx",
             function() require("peek").close() end,
             -- This will now work correctly
-            desc = icons.ui.close .. " [c]lose"
+            desc = icons.ui.close .. " [c=x]lose"
         },
         {
             "<leader>fe",

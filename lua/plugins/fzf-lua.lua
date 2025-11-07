@@ -1,12 +1,27 @@
+-- Relative Path: lua/plugins/fzf-lua.lua
+-- Plugin Repo: https://github.com/ibhagwan/fzf-lua
+--
+-- This file configures 'fzf-lua', a plugin that provides a fast,
+-- fzf-powered fuzzy finder UI for Neovim.
+
 return {
 	"ibhagwan/fzf-lua",
+
+	-- 'lazy = false' ensures this plugin loads on startup.
+	-- This is often desired for a primary fuzzy finder
+	-- so that vim.ui.select can be overridden immediately.
 	lazy = false,
+
+	-- Depends on 'nvim-web-devicons' to show icons in the fzf results
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 
+	-- Define keymaps using the 'keys' table for lazy-loading
 	keys = function()
+		-- Load your centralized icons
 		local icons = require("configs.all_the_icons")
 
 		return {
+			-- === File/Buffer ===
 			{
 				"<leader>ff",
 				function()
@@ -17,6 +32,7 @@ return {
 			{
 				"<leader>fc",
 				function()
+					-- Search for files, but only within your Neovim config directory
 					require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
 				end,
 				desc = icons.ui.settings .. " [c]onfig files",
@@ -36,6 +52,15 @@ return {
 				desc = icons.tabs.tab .. " [b]uffers",
 			},
 			{
+				"<leader>fo",
+				function()
+					require("fzf-lua").oldfiles()
+				end,
+				desc = icons.ui.history .. " [o]ld files",
+			},
+
+			-- === Neovim/Help ===
+			{
 				"<leader>fh",
 				function()
 					require("fzf-lua").help_tags()
@@ -50,13 +75,6 @@ return {
 				desc = icons.ui.keyboard .. " [k]eymaps",
 			},
 			{
-				"<leader>fo",
-				function()
-					require("fzf-lua").oldfiles()
-				end,
-				desc = icons.ui.history .. " [o]ld files",
-			},
-			{
 				"<leader>fC",
 				function()
 					require("fzf-lua").commands()
@@ -64,6 +82,8 @@ return {
 				desc = icons.ui.command .. " [C]ommands",
 			},
 
+			-- === LSP ===
+			-- which-key group header for LSP
 			{
 				"<leader>fl",
 				"",
@@ -98,6 +118,8 @@ return {
 				desc = icons.lsp.rename .. " find [r]eferences",
 			},
 
+			-- === Diagnostics ===
+			-- which-key group header for Diagnostics
 			{
 				"<leader>fd",
 				"",
@@ -120,45 +142,50 @@ return {
 			{
 				"<leader>fdl",
 				function()
+					-- Use the built-in float, as fzf isn't needed for a single line
 					vim.diagnostic.open_float()
 				end,
 				desc = icons.diagnostics.info .. " [l]ine diagnostics",
 			},
 
+			-- === Symbols ===
+			-- which-key group header for Symbols
 			{
-				"<leader>fs",
+				"<leader>fS",
 				"",
-				desc = icons.lsp.symbols .. " [s]ymbols",
+				desc = icons.lsp.symbols .. " [S]ymbols",
 			},
 			{
-				"<leader>fsd",
+				"<leader>fSd",
 				function()
 					require("fzf-lua").lsp_document_symbols()
 				end,
 				desc = icons.lsp.symbols .. " [d]ocument symbols",
 			},
 			{
-				"<leader>fsw",
+				"<leader>fSw",
 				function()
 					require("fzf-lua").lsp_workspace_symbols()
 				end,
 				desc = icons.lsp.symbols .. " [w]orkspace symbols",
 			},
 
+			-- === Git ===
+			-- which-key group header for Git
 			{
-				"<leader>fg",
+				"<leader>fG",
 				"",
-				desc = icons.git.git .. " [g]it",
+				desc = icons.git.git .. " [G]it",
 			},
 			{
-				"<leader>fgs",
+				"<leader>fGs",
 				function()
 					require("fzf-lua").git_status()
 				end,
 				desc = icons.git.git .. " [s]tatus",
 			},
 			{
-				"<leader>fgc",
+				"<leader>fGc",
 				function()
 					require("fzf-lua").git_commits()
 				end,
@@ -167,12 +194,15 @@ return {
 		}
 	end,
 
+	-- 'opts' table (empty) - fzf-lua will use its default settings
 	opts = {},
 
-	-- ⭐️ THIS IS THE FIX ⭐️
-	-- It registers fzf-lua as the default UI for vim.ui.select
+	-- 'config' function runs after the plugin is loaded
 	config = function(_, opts)
+		-- Run the main setup function with the provided 'opts'
 		require("fzf-lua").setup(opts)
-		require("fzf-lua").register_ui_select() -- Correct function name
+		-- Register fzf-lua as the default UI for 'vim.ui.select'
+		-- This makes other plugins use fzf for selection menus
+		require("fzf-lua").register_ui_select()
 	end,
 }

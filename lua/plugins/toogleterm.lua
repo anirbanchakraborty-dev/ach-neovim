@@ -1,71 +1,79 @@
--- Place this at the top of the file
+-- Relative Path: lua/plugins/toogleterm.lua
+-- Plugin Repo: https://github.com/akinsho/toggleterm.nvim
+--
+-- This file configures 'toggleterm.nvim' for managing
+-- floating and split terminal windows.
+
+-- Load your centralized icons
 local icons = require("configs.all_the_icons")
 
 return {
     "akinsho/toggleterm.nvim",
 
-    -- We use a function for keys to load the icons
+    -- Define keymaps for toggleterm
     keys = function()
         return {
             {
+                -- Keymap to toggle a horizontal split terminal
                 "<leader>st",
-                -- This command will toggle a horizontal split terminal
                 "<cmd>ToggleTerm direction=horizontal<CR>",
-                desc = icons.ui.toggle_on .. " [t]oggle"
+                desc = icons.ui.toggle_on .. " [t]oggle",
             },
-
-            -- ⭐️ 1. KEYMAP TO "KILL" THE PROCESS ⭐️
-            -- This works from Normal-mode
             {
+                -- Keymap to kill the process in the active toggleterm
                 "<leader>sk",
                 "<cmd>ToggleTermKill<CR>",
-                desc = icons.dap.terminate .. " [k]ill"
+                desc = icons.dap.terminate .. " [k]ill",
             },
-
-            -- ⭐️ 2. KEYMAP TO "MINIMIZE" (TOGGLE) ⭐️
-            -- The <t> means this keymap only works in Terminal-mode
             {
-                "<Esc><Esc>", -- You can change <C-x> to <Esc><Esc> or another key
+                -- Keymap to toggle (hide/show) the terminal *from* terminal mode
+                "<Esc><Esc>",
                 "<cmd>ToggleTerm<CR>",
-                mode = "t",
-                desc = "Toggle Terminal"
+                mode = "t", -- This keymap only works in Terminal-mode
+                desc = "Toggle Terminal",
             },
             {
+                -- Keymap to toggle a custom floating 'lazygit' terminal
                 "<leader>gl",
                 "<cmd>lua _LAZYGIT_TOGGLE()<CR>",
-                desc = icons.git.lazygit .. " [l]azygit"
+                desc = icons.git.lazygit .. " [l]azygit",
             },
         }
     end,
 
-    -- This is where we pass options to the setup function
+    -- 'opts' table passes configuration to the setup function
     opts = {
-        -- Set the default terminal to be a horizontal split
+        -- Set the default direction for new terminals to 'horizontal'
         direction = "horizontal",
+        -- 'hidden = true' allows terminals (like lazygit) to be persistent
         hidden = true,
+        -- Do not close the terminal window when the process exits
         close_on_exit = false,
+        -- Add a dimmed background to inactive terminal windows
         shade_terminals = true,
     },
 
-    -- This function calls the setup, passing in your `opts`
+    -- 'config' function runs after the plugin is loaded
     config = function(_, opts)
-        -- Run the default setup
+        -- Run the standard setup with the options from the 'opts' table
         require("toggleterm").setup(opts)
 
-        -- ⭐️ 2. THIS IS THE CODE YOU FOUND ⭐️
-        -- We define the persistent lazygit terminal here.
+        -- === Custom LazyGit Terminal ===
+        -- Load the Terminal object from the plugin
         local Terminal = require("toggleterm.terminal").Terminal
+
+        -- Create a new, persistent terminal instance for lazygit
         local lazygit = Terminal:new({
-            cmd = "lazygit",
-            hidden = true,
-            direction = "float", -- Make sure it's a float
+            cmd = "lazygit",        -- The command to run
+            hidden = true,          -- Keep it persistent
+            direction = "float",    -- Make this one a float
             float_opts = {
-                border = "rounded",
+                border = "rounded", -- Use a rounded border
             },
         })
 
-        -- ⭐️ 3. DEFINE THE GLOBAL FUNCTION ⭐️
-        -- This function will be called by your keymap.
+        -- Define a global function that the '<leader>gl' keymap can call
+        -- This is necessary to toggle the specific 'lazygit' instance
         function _LAZYGIT_TOGGLE()
             lazygit:toggle()
         end

@@ -1,0 +1,11 @@
+macOS system files
+
+Ignore .DS_Store files in all directories
+
+**/.DS_Store
+
+lazy.nvim lockfile
+
+Ignore the lockfile in the root directory
+
+/lazy-lock.json
