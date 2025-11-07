@@ -1,11 +1,18 @@
 -- lua/utilities/keymap-export.lua
 local M = {}
 
-local mode_names = {
+local USE_ICONS = false
+
+local mode_names = USE_ICONS and {
 	n = "󰘧 Normal",
 	v = "󰆤 Visual",
 	i = " Insert",
 	t = "󰞷 Terminal",
+} or {
+	n = "Normal",
+	v = "Visual",
+	i = "Insert",
+	t = "Terminal",
 }
 
 -- Category mapping based on <leader>x prefix

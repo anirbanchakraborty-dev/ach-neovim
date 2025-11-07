@@ -43,7 +43,7 @@ This configuration is built to be:
 
 ---
 
-## ⌨Keymaps
+## Keymaps
 
 Keymaps in this config follow a structured `<leader>`-based system.
 
