@@ -5,7 +5,7 @@
 -- in the sign column and provides keymaps for hunk operations.
 
 -- Import the centralized icons table
-local icons = require("configs.all_the_icons")
+local icons = require("basic_configurations.all_the_icons")
 
 return {
 	"lewis6991/gitsigns.nvim",

@@ -18,7 +18,7 @@ return {
 	-- Define keymaps using the 'keys' table for lazy-loading
 	keys = function()
 		-- Load your centralized icons
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 
 		return {
 			-- === File/Buffer ===

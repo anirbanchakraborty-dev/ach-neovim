@@ -1,4 +1,4 @@
--- Relative Path: lua/configs/basic_auto_commands.lua
+-- Relative Path: lua/basic_configurations/basic_auto_commands.lua
 --
 -- This file defines custom autocommands for event-based automation.
 
@@ -116,5 +116,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			-- Create the directory recursively
 			vim.fn.mkdir(dir, "p")
 		end
+	end,
+})
+
+-- === Auto-create a KEYMAPS.md file to integrate into README.md ===
+-- Generated automatically every time you exit Neovim
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		require("utilities.keymap-export").export_markdown()
 	end,
 })

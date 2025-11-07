@@ -45,7 +45,7 @@ return {
 			-- 'on_attach' is a crucial function that runs *every time*
 			-- an LSP server attaches to a buffer.
 			on_attach = function(client, bufnr)
-				local icons = require("configs.all_the_icons")
+				local icons = require("basic_configurations.all_the_icons")
 				local keymap = vim.keymap.set
 				local opts = { buffer = bufnr } -- Apply keymaps to this buffer only
 
@@ -132,7 +132,7 @@ return {
 			end
 
 			-- Set the icons for diagnostics (errors, warnings, etc.)
-			local icons = require("configs.all_the_icons")
+			local icons = require("basic_configurations.all_the_icons")
 			vim.diagnostic.config({
 				signs = {
 					text = {
@@ -152,7 +152,7 @@ return {
 		cmd = "Mason", -- Lazy-load until :Mason is run
 		event = "VeryLazy",
 		opts = function(_, opts)
-			local icons = require("configs.all_the_icons")
+			local icons = require("basic_configurations.all_the_icons")
 			-- Configure the Mason UI
 			opts.ui = {
 				border = "rounded",
@@ -201,7 +201,7 @@ return {
 				function()
 					require("conform").format({ async = true, lsp_fallback = true })
 				end,
-				desc = require("configs.all_the_icons").lsp.formatting .. " [f]ormat",
+				desc = require("basic_configurations.all_the_icons").lsp.formatting .. " [f]ormat",
 				mode = { "n", "v" },
 			},
 		},

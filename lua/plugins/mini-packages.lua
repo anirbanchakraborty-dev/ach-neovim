@@ -4,7 +4,7 @@
 -- This file bundles and configures various plugins from the 'mini.nvim' suite.
 
 -- Load your centralized icons
-local icons = require("configs.all_the_icons")
+local icons = require("basic_configurations.all_the_icons")
 
 return {
 	-- === Mini.comment ===
@@ -139,7 +139,7 @@ return {
 		opts = {},
 		-- Add a keymap to trim whitespace
 		keys = function()
-			local icons = require("configs.all_the_icons")
+			local icons = require("basic_configurations.all_the_icons")
 			return {
 				{
 					"<leader>rw",

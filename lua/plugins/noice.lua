@@ -36,7 +36,7 @@ return {
 
 	-- Define keymaps for Noice
 	keys = function()
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 		return {
 			-- which-key group header
 			{ "<leader>n", "", desc = icons.ui.bolt .. " [n]oice" },

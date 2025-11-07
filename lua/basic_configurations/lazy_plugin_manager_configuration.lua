@@ -1,4 +1,4 @@
--- Relative Path: lua/configs/lazy_plugin_manager_configuration.lua
+-- Relative Path: lua/basic_configurations/lazy_plugin_manager_configuration.lua
 -- Plugin Repo: https://github.com/folke/lazy.nvim
 --
 -- This file handles the setup and configuration of the 'lazy.nvim' plugin manager.

@@ -5,7 +5,7 @@
 -- display diagnostics, references, and symbols in a pretty list.
 
 -- Load your centralized icons
-local icons = require("configs.all_the_icons")
+local icons = require("basic_configurations.all_the_icons")
 
 return {
 	"folke/trouble.nvim",

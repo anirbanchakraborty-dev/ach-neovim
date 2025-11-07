@@ -5,13 +5,14 @@
 -- floating and split terminal windows.
 
 -- Load your centralized icons
-local icons = require("configs.all_the_icons")
+local icons = require("basic_configurations.all_the_icons")
 
 return {
 	"akinsho/toggleterm.nvim",
 
 	-- Define keymaps for toggleterm
 	keys = function()
+		-- Return the table of keymaps
 		return {
 			{
 				-- Keymap to toggle a horizontal split terminal
@@ -38,6 +39,12 @@ return {
 				"<cmd>lua _LAZYGIT_TOGGLE()<CR>",
 				desc = icons.git.lazygit .. " [l]azygit",
 			},
+			-- ⭐️ YOUR NEW KEYMAP NOW CALLS A GLOBAL FUNCTION ⭐️
+			{
+				"<leader>gc",
+				"<cmd>lua _CREATE_GITHUB_REPO()<CR>",
+				desc = icons.vendors.github .. " [c]reate GitHub Repo",
+			},
 		}
 	end,
 
@@ -58,10 +65,10 @@ return {
 		-- Run the standard setup with the options from the 'opts' table
 		require("toggleterm").setup(opts)
 
-		-- === Custom LazyGit Terminal ===
 		-- Load the Terminal object from the plugin
 		local Terminal = require("toggleterm.terminal").Terminal
 
+		-- === Custom LazyGit Terminal ===
 		-- Create a new, persistent terminal instance for lazygit
 		local lazygit = Terminal:new({
 			cmd = "lazygit", -- The command to run
@@ -73,9 +80,37 @@ return {
 		})
 
 		-- Define a global function that the '<leader>gl' keymap can call
-		-- This is necessary to toggle the specific 'lazygit' instance
 		function _LAZYGIT_TOGGLE()
 			lazygit:toggle()
+		end
+
+		-- Define a global function for the '<leader>gc' keymap
+		function _CREATE_GITHUB_REPO()
+			-- 1. Prompt the user for the repo name
+			local repo_name = vim.fn.input("Enter GitHub Repo Name: ")
+
+			-- 2. Check if the user cancelled the input
+			if repo_name == "" or repo_name == nil then
+				print("Cancelled repo creation.")
+				return
+			end
+
+			-- 3. Construct the 'gh' command
+			local gh_cmd = string.format("gh repo create %s --public --source=.", repo_name)
+
+			-- 4. Create a new terminal instance with the command
+			local gh_term = Terminal:new({
+				cmd = gh_cmd,
+				direction = "float",
+				float_opts = {
+					border = "rounded",
+				},
+				hidden = false,
+				close_on_exit = true,
+			})
+
+			-- 5. Open the new terminal
+			gh_term:open()
 		end
 	end,
 }

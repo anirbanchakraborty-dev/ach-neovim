@@ -20,7 +20,7 @@ return {
 		-- Load the pre-built 'dashboard' theme
 		local dashboard = require("alpha.themes.dashboard")
 		-- Load your centralized icons
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 
 		-- === Header ===
 		-- Set the 'header' section to a custom ASCII art logo

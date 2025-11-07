@@ -6,7 +6,7 @@ return {
 
 	-- 'opts' function ONLY returns the options table
 	opts = function()
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 
 		local opts = {
 			preset = "helix",
@@ -32,7 +32,7 @@ return {
 		wk.setup(opts)
 
 		-- 2. NOW register groups AFTER setup
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 		wk.add({
 			{ "<leader>b", group = icons.tabs.tab .. " [b]uffer" },
 			{ "<leader>c", group = icons.lsp.code_action .. " [c]onform", mode = { "v", "n" } },
@@ -40,6 +40,7 @@ return {
 			{ "<leader>f", group = icons.files.file .. " [f]ile/[f]zf", mode = { "v", "n" } },
 			{ "<leader>g", group = icons.git.git .. " [g]it" },
 			{ "<leader>i", group = icons.ui.indent .. " [i]ndent", mode = "v" },
+			{ "<leader>k", group = icons.ui.keyboard .. " [k]eymaps" },
 			{ "<leader>l", group = icons.lsp.logo .. " [l]sp" },
 			{ "<leader>n", group = icons.ui.bolt .. " [n]oice" },
 			{ "<leader>q", group = icons.ui.quit .. " [q]uit" },

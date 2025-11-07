@@ -1,4 +1,4 @@
--- Relative Path: lua/configs/all_the_icons.lua
+-- Relative Path: lua/basic_configurations/all_the_icons.lua
 --
 -- This file centralizes all Nerd Font icons used throughout the configuration.
 -- It allows other files (plugins, UI components) to require this single module

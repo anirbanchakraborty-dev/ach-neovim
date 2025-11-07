@@ -13,7 +13,7 @@ return {
 	-- 'opts' function defines the Lualine configuration
 	opts = function()
 		-- Load your centralized icons
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 
 		-- Helper function to get the foreground color from an existing highlight group.
 		-- This is used to make Lualine's colors match the colorscheme's

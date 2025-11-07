@@ -45,7 +45,7 @@ return {
 
 	-- Global keymaps to open or interact with 'oil'
 	keys = function()
-		local icons = require("configs.all_the_icons")
+		local icons = require("basic_configurations.all_the_icons")
 
 		-- -- Helper function to format the notify message
 		-- local function pad(icon, text)

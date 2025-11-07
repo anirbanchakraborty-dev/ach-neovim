@@ -1,4 +1,4 @@
--- Relative Path: lua/configs/basic_options.lua
+-- Relative Path: lua/basic_configurations/basic_options.lua
 --
 -- This file sets core Neovim options (settings).
 -- These are the equivalent of 'set <option>' in .vimrc.
@@ -9,7 +9,7 @@ vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
 -- Create a local alias for vim.opt for brevity
 local opt = vim.opt
 -- Import the centralized icons table
-local icons = require("configs.all_the_icons")
+local icons = require("basic_configurations.all_the_icons")
 
 -- === UI and Appearance ===
 
