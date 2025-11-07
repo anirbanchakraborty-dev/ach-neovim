@@ -27,12 +27,12 @@ return {
 		local opts = {
 			-- Configure key mappings for the completion menu
 			keymap = {
-				preset = "default",                   -- Start with default keybindings
+				preset = "default", -- Start with default keybindings
 				-- Custom overrides:
 				["<C-Z>"] = { "accept", "fallback" }, -- Accept suggestion or fallback
 				["<Tab>"] = { "snippet_forward", "fallback" }, -- Jump forward in snippet or fallback
 				["<S-Tab>"] = { "snippet_backward", "fallback" }, -- Jump backward in snippet or fallback
-				["<CR>"] = { "accept", "fallback" },  -- Accept suggestion or fallback
+				["<CR>"] = { "accept", "fallback" }, -- Accept suggestion or fallback
 			},
 
 			-- Configure visual appearance

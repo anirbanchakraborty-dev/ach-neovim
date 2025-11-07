@@ -77,25 +77,25 @@ map("n", "<leader>fi", "gg=G", { desc = icons.lsp.formatting .. " auto-[i]ndent 
 -- and then runs the 'gh repo create' command in a
 -- floating terminal.
 local function create_github_repo()
-    -- 1. Prompt the user for the repo name
-    local repo_name = vim.fn.input("Enter GitHub Repo Name: ")
+	-- 1. Prompt the user for the repo name
+	local repo_name = vim.fn.input("Enter GitHub Repo Name: ")
 
-    -- 2. Check if the user cancelled the input
-    if repo_name == "" or repo_name == nil then
-        print("Cancelled repo creation.")
-        return
-    end
+	-- 2. Check if the user cancelled the input
+	if repo_name == "" or repo_name == nil then
+		print("Cancelled repo creation.")
+		return
+	end
 
-    -- 3. Construct the 'gh' command
-    --    This uses the user's input, sets it to public, and uses the current directory
-    local gh_cmd = string.format("gh repo create %s --public --source=.", repo_name)
+	-- 3. Construct the 'gh' command
+	--    This uses the user's input, sets it to public, and uses the current directory
+	local gh_cmd = string.format("gh repo create %s --public --source=.", repo_name)
 
-    -- 4. Construct the ToggleTerm command to run the 'gh' command
-    --    We use a float so the user can interact with 'gh' prompts.
-    local term_cmd = string.format("ToggleTerm cmd='%s' direction=float", gh_cmd)
+	-- 4. Construct the ToggleTerm command to run the 'gh' command
+	--    We use a float so the user can interact with 'gh' prompts.
+	local term_cmd = string.format("ToggleTerm cmd='%s' direction=float", gh_cmd)
 
-    -- 5. Execute the ToggleTerm command
-    vim.cmd(term_cmd)
+	-- 5. Execute the ToggleTerm command
+	vim.cmd(term_cmd)
 end
 
 -- Keymap to run the repo creation function

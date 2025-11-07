@@ -24,8 +24,8 @@ return {
 				opts = {
 					-- Define libraries to help 'lua_ls' understand plugin APIs
 					library = {
-						{ path = "${3rd}/luv/library",     words = { "vim%.uv" } },
-						{ path = "${3rd}/plenary.nvim",    words = { "plenary" } },
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+						{ path = "${3rd}/plenary.nvim", words = { "plenary" } },
 						{ path = "${3rd}/nvim-treesitter", words = { "vim.treesitter" } },
 					},
 				},
@@ -107,6 +107,11 @@ return {
 						},
 					},
 				},
+				-- ADD THE BASH LANGUAGE SERVER
+				bashls = {
+					-- Tell the server to attach to these filetypes
+					filetypes = { "sh", "zsh", "zshrc", "basic" },
+				},
 			},
 		},
 		-- 'config' function runs after 'opts' to finalize setup
@@ -167,7 +172,7 @@ return {
 		dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
 		opts = {
 			-- List of LSPs to auto-install via Mason
-			ensure_installed = { "lua_ls", "ruff", "pyright", "marksman", "texlab" },
+			ensure_installed = { "lua_ls", "ruff", "pyright", "marksman", "texlab", "bashls" },
 			-- Enable automatic installation
 			automatic_installation = true,
 		},
@@ -179,7 +184,7 @@ return {
 		dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
 		opts = {
 			-- List of non-LSP tools to auto-install
-			ensure_installed = { "stylua", "prettier", "latexindent" },
+			ensure_installed = { "stylua", "prettier", "latexindent", "shellcheck", "shfmt" },
 			auto_update = true,
 			run_on_start = true,
 		},
@@ -209,6 +214,9 @@ return {
 					lua = { "stylua" },
 					markdown = { "prettier" },
 					tex = { "latexindent" },
+					-- ADD FORMATTERS FOR SHELL SCRIPTS
+					sh = { "shfmt" },
+					zsh = { "shfmt" },
 				},
 				-- Enable auto-formatting on save
 				format_after_save = {
