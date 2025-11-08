@@ -46,17 +46,29 @@ return {
 				-- resolve file paths
 				local file = vim.api.nvim_buf_get_name(0)
 				local cwd = vim.fn.fnamemodify(file, ":h")
+				-- Get relative filename (e.g., "my-file.md")
 				local name = vim.fn.fnamemodify(file, ":t")
-				local output = vim.fn.fnamemodify(file, ":r") .. ".pdf"
+				-- Get relative output name (e.g., "my-file.pdf")
+				local output = vim.fn.fnamemodify(file, ":t:r") .. ".pdf"
 
-				local cmd = string.format(
-					"pandoc -f gfm %s -o %s --pdf-engine=xelatex -V monofont='FiraCode Nerd Font Mono' -V geometry='margin=1.5cm'",
-					name,
-					output
-				)
+				-- Build the command as a TABLE, not a string.
+				-- This avoids all shell quoting issues.
+				local cmd = {
+					"pandoc",
+					"-f",
+					"gfm",
+					name, -- The input file
+					"-o",
+					output, -- The output file
+					"--pdf-engine=xelatex",
+					"-V",
+					"monofont=FiraCode Nerd Font Mono", -- Note: no extra quotes!
+					"-V",
+					"geometry=margin=1.5cm", -- Note: no extra quotes!
+				}
 
-				-- run asynchronously instead of `vim.cmd("! ...")`
-				vim.fn.jobstart(cmd, {
+				-- run asynchronously
+				vim.fn.jobstart(cmd, { -- Pass the table directly
 					cwd = cwd,
 					on_exit = function(_, code)
 						local notify = function(msg, level)
@@ -68,6 +80,7 @@ return {
 						end
 
 						if code == 0 then
+							-- Use the 'output' variable which is just the filename
 							notify(string.format("%s  PDF exported:\n%s", icons.ui.success_circle, output))
 						else
 							notify(string.format("%s  PDF export failed", icons.ui.error_circle), vim.log.levels.ERROR)

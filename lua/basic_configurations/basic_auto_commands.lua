@@ -123,6 +123,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Generated automatically every time you exit Neovim
 vim.api.nvim_create_autocmd("VimLeave", {
 	callback = function()
-		require("utilities.keymap-export").export_markdown()
+		local cwd = vim.fn.getcwd()
+		local nvim_config = vim.fn.stdpath("config") -- usually ~/.config/nvim
+
+		if cwd == nvim_config then
+			require("utilities.keymap-export").export_markdown()
+		end
 	end,
 })

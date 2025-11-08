@@ -111,6 +111,13 @@ return {
 				bashls = {
 					-- Tell the server to attach to these filetypes
 					filetypes = { "sh", "zsh", "zshrc", "basic" },
+					settings = {
+						bashIde = {
+							shellcheck = {
+								enable = true,
+							},
+						},
+					},
 				},
 			},
 		},
@@ -218,12 +225,21 @@ return {
 					sh = { "shfmt" },
 					zsh = { "shfmt" },
 				},
+				formatters = {
+					latexindent = {
+						prepend_args = { "-m" },
+						stdin = true,
+						exit_codes = { 0 },
+					},
+				},
+
 				-- Enable auto-formatting on save
-				format_after_save = {
-					timeout_ms = 500,
+				format_on_save = {
+					timeout_ms = 2000,
 					lsp_fallback = true, -- Use LSP formatter if conform fails
 				},
 			})
 		end,
 	},
 }
+
