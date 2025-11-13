@@ -17,7 +17,7 @@ return {
 		opts = function()
 			-- === Customization Flags ===
 			-- Set to 'true' to enable a transparent background
-			local transparent = false
+			local transparent = true
 
 			-- === Custom Color Palette ===
 			-- These hex codes define your personal color overrides

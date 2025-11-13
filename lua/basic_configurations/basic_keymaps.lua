@@ -75,3 +75,25 @@ map({ "v" }, "<leader>ir", ">gv", { desc = icons.nav.arrow_right .. " [r]ight" }
 map("n", "<leader>fa", "ggVG", { desc = icons.ui.clipboard_text .. " select [a]ll" })
 -- Auto-indent the entire file
 map("n", "<leader>fi", "gg=G", { desc = icons.lsp.formatting .. " auto-[i]ndent entire file" })
+
+-- === LaTeX Build Keymaps ===
+local tex_build = require("utilities.tex-build")
+
+-- Main TeX group keymap (for which-key display)
+map("n", "<leader>ft", function() end, { desc = icons.languages.tex .. " [t]ex" })
+
+-- Build with auto-detection (primary command)
+map("n", "<leader>ftb", function()
+	tex_build.build()
+end, { desc = icons.files.pdf .. " [b]uild PDF (auto-detect)" })
+
+-- View PDF without rebuilding
+map("n", "<leader>ftv", function()
+	tex_build.view()
+end, { desc = icons.files.pdf .. " [v]iew PDF" })
+
+-- Clean auxiliary files
+map("n", "<leader>ftc", function()
+	tex_build.clean()
+end, { desc = icons.ui.delete .. " [c]lean auxiliary files" })
+

@@ -226,16 +226,12 @@ return {
 					zsh = { "shfmt" },
 				},
 				formatters = {
-					latexindent = {
-						prepend_args = { "-m" },
-						stdin = true,
-						exit_codes = { 0 },
-					},
+					-- formatter specific configurations are placed here
 				},
 
 				-- Enable auto-formatting on save
 				format_on_save = {
-					timeout_ms = 2000,
+					timeout_ms = 10000,
 					lsp_fallback = true, -- Use LSP formatter if conform fails
 				},
 			})
